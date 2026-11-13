@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900">
+<rect width="1600" height="900" fill="#fff"/>
+<g fill="none" stroke="#17242b" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+<!-- An original maid character doing the central sorting action. -->
+<path d="M398 326 C374 272 398 211 462 200 C528 190 568 229 556 293 C550 328 528 352 493 360 C452 367 418 355 398 326 Z"/>
+<path d="M405 240 C423 188 507 173 546 223 M409 226 L399 199 L430 208 L439 181 L462 201 L487 176 L502 201 L533 187 L535 218"/>
+<path d="M414 270 C399 318 409 383 388 421 M540 259 C567 317 551 377 571 413"/>
+<path d="M433 273 Q443 265 453 274 M496 273 Q507 265 517 273"/>
+<circle cx="444" cy="279" r="4" fill="#17242b" stroke="none"/><circle cx="506" cy="279" r="4" fill="#17242b" stroke="none"/>
+<path d="M466 304 Q478 311 490 302"/>
+<path d="M429 351 C405 390 395 471 390 568 L564 568 C558 477 550 400 525 352 C496 371 458 371 429 351 Z"/>
+<path d="M446 367 L457 535 L515 535 L522 366 C501 389 469 391 446 367 Z" stroke-width="4"/>
+<path d="M455 398 Q483 414 515 397 M461 525 Q489 515 511 526" stroke-width="3"/>
+<path d="M401 401 C356 430 344 475 326 515 M543 401 C593 414 635 430 682 447"/>
+<path d="M326 515 C312 526 318 546 337 540 L362 522 M682 447 C695 437 708 442 710 456 C704 470 690 472 676 465"/>
+<path d="M417 568 L411 659 M535 568 L548 659 M411 659 L389 678 M548 659 L571 677"/>
+<!-- A worktree folder becomes folded linen in Alice's hands. -->
+<path d="M663 354 L730 354 L746 373 L816 373 L808 457 L661 457 Z"/>
+<path d="M673 395 C712 387 760 401 799 391" stroke-width="3"/>
+<path d="M715 354 C712 322 738 300 768 305 M737 328 L713 311 M750 315 L772 291" stroke="#2d73b9"/>
+<path d="M696 467 L810 467 L826 483 L807 500 L689 500 L675 483 Z" fill="#dcecf2" stroke="#2d73b9"/>
+<path d="M690 480 L812 480" stroke="#2d73b9" stroke-width="3"/>
+<!-- Clothesline keeps uncertain work untouched. -->
+<path d="M867 255 C1010 272 1156 265 1274 244 M878 255 L854 672 M1266 247 L1290 672"/>
+<path d="M935 274 L935 309 M1081 272 L1081 309 M1196 263 L1196 300" stroke="#e85d3f"/>
+<path d="M891 309 L962 309 L976 327 L1024 327 L1017 421 L890 421 Z"/>
+<path d="M1041 309 L1110 309 L1124 327 L1170 327 L1164 421 L1040 421 Z"/>
+<path d="M1162 300 L1210 300 L1222 315 L1250 315 L1246 388 L1161 388 Z"/>
+<path d="M916 345 C934 333 954 343 963 359 M1072 347 C1090 335 1112 344 1120 360" stroke-width="3"/>
+<path d="M1181 337 L1224 337" stroke="#e85d3f"/>
+<!-- Laundry basket receives only folded, merged work. -->
+<path d="M667 591 L862 591 L838 704 L690 704 Z"/>
+<path d="M700 591 C704 535 819 535 828 591"/>
+<path d="M710 621 L721 680 M752 621 L756 680 M795 621 L790 680 M830 621 L818 680" stroke-width="3"/>
+<path d="M700 565 L827 565 L841 582 L824 596 L694 596 L681 581 Z" fill="#dcecf2" stroke="#2d73b9"/>
+<path d="M695 580 L832 580" stroke="#2d73b9" stroke-width="3"/>
+<path d="M752 500 C760 524 760 538 757 551" stroke="#e85d3f"/>
+<path d="M746 539 L758 554 L771 539" stroke="#e85d3f"/>
+</g>
+<g font-family="cursive" font-size="28" fill="#2d73b9">
+<text x="648" y="284" transform="rotate(-5 648 284)">merged</text>
+<text x="692" y="748" transform="rotate(2 692 748)">folded away</text>
+</g>
+<text x="1041" y="462" font-family="cursive" font-size="28" fill="#e85d3f" transform="rotate(-3 1041 462)">still WIP — keep</text>
+<path d="M1134 445 C1140 431 1134 418 1120 407" fill="none" stroke="#e85d3f" stroke-width="4" stroke-linecap="round"/>
+</svg>

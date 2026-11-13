@@ -1,0 +1,11 @@
+/target
+/.rune-reference
+/.impeccable/review
+/.impeccable/mocks
+.taste-skill/
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+*.png.tmp

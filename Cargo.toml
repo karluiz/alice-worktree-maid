@@ -1,0 +1,26 @@
+[package]
+name = "alice-worktrees"
+version = "0.1.0"
+edition = "2024"
+description = "A careful personal Git worktree cleaner"
+license = "MIT"
+
+[features]
+default = ["app"]
+app = ["dep:rune"]
+
+[dependencies]
+rune = { git = "https://github.com/anomalyco/rune", rev = "b556a38a1ff88aa8690d21b45ebf9b9167038674", optional = true, features = ["native-file-dialog"] }
+
+[lib]
+name = "alice"
+path = "src/lib.rs"
+
+[[bin]]
+name = "alice"
+path = "src/main.rs"
+required-features = ["app"]
+
+[[bin]]
+name = "alice-cli"
+path = "src/bin/alice-cli.rs"

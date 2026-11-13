@@ -1,0 +1,8 @@
+{
+  "events": [
+    {"t": 0.1, "type": "tap", "key": "send-alice"},
+    {"t": 1.0, "type": "tap", "key": "select-pile"},
+    {"t": 1.2, "type": "tap", "key": "sweep-selected"},
+    {"t": 1.4, "type": "tap", "key": "confirm-sweep"}
+  ]
+}

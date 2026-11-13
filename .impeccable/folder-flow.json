@@ -1,0 +1,6 @@
+{
+  "events": [
+    {"t": 0.1, "type": "tap", "key": "choose-folder"},
+    {"t": 0.3, "type": "file-dialog", "path": "/tmp"}
+  ]
+}

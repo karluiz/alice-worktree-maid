@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en" data-type="software" data-radius="sharp" data-ground="sand" data-buttons="solid" data-motion>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Alice: Cargo build cleanup for developers</title>
+<meta name="description" content="Review configured Cargo targets, inspect generated artifacts, and confirm build cleanup without touching source or Git history.">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Alice: Cargo build cleanup for developers">
+<meta property="og:description" content="Inspect 599 GB of Cargo artifacts and review the exact preservation boundary before cleaning.">
+<meta property="og:image" content="share.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="site-kind" content="software">
+<meta name="page-type" content="software">
+<meta name="theme-color" content="#000000">
+<link rel="icon" href="local/alice-icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/ui/cards.css">
+<link rel="stylesheet" href="assets/motion/motion.css">
+<link rel="stylesheet" href="assets/backgrounds/backgrounds.css">
+<link rel="stylesheet" href="assets/layout/layout.css">
+<link rel="stylesheet" href="assets/icons/icon.css">
+<style>
+:root {
+  --p-bg: #000000; --p-surface: #141414; --p-ink: #f4f2ed; --p-muted: #b5b5b5;
+  --p-accent: #ff7663; --p-accent-ink: #000000; --p-action: #ff7663; --p-action-ink: #000000;
+  --p-inv-bg: #f4f2ed; --p-inv-surface: #dedcd7; --p-inv-ink: #000000; --p-inv-muted: #3f3e3d;
+  --p-inv-accent: #000000; --p-inv-accent-ink: #f4f2ed; --p-inv-action: #000000; --p-inv-action-ink: #f4f2ed;
+  --font-display: "Inter", system-ui, sans-serif;
+  --font-text: "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --display-weight: 500;
+  --display-tracking: -0.035em;
+  --display-tracking-xl: -0.042em;
+  --ly-scale: 0.98;
+}
+</style>
+<script>document.documentElement.classList.add('m-enter');setTimeout(()=>document.documentElement.classList.add('m-enter-done'),700)</script>
+<script src="assets/backgrounds/backgrounds.js"></script>
+<script>document.documentElement.classList.add('mo-js');setTimeout(()=>document.documentElement.classList.add('mo-safe'),2500)</script>
+<link rel="modulepreload" href="assets/moments/moments.js">
+<link rel="modulepreload" href="assets/moments/lib.js">
+<link rel="modulepreload" href="assets/moments/word-highlight/moment.js">
+<link rel="stylesheet" href="preview.css">
+</head>
+<body>
+<!-- software; centred hero, nav-centre, footer-statement, close-word, surface-pairs, solid buttons, client Alice icon, sand lit ground; word-highlight in statement -->
+<header class="nav">
+  <div class="wrap nav__bar">
+    <a class="skip-link" href="#top">Skip to content</a>
+    <a class="nav__logo" href="#top"><img class="alice-logo" src="local/alice-icon.svg" alt="" width="24" height="24">Alice</a>
+    <nav class="nav__links" aria-label="Main">
+      <div class="nav__item">
+        <a class="nav__link" href="#top">Product <svg class="chev" viewBox="0 0 12 12" aria-hidden="true"><path d="M3 4.5l3 3 3-3" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <div class="nav__menu">
+          <div class="wrap grid">
+            <div class="menu-col span-3">
+              <p class="t-label">Build files</p>
+              <a href="#top">Target list<span>Configured Cargo output</span></a>
+              <a href="#safety">Confirmation<span>Exact paths before cleaning</span></a>
+            </div>
+            <div class="menu-col span-3">
+              <p class="t-label">Existing workflow</p>
+              <a href="#top" data-show-worktrees>Worktrees<span>The original three-pile report</span></a>
+              <a href="#statement">Preservation<span>Source and Git history stay</span></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="nav__item"><a class="nav__link" href="#safety">Safety</a></div>
+      <div class="nav__item"><a class="nav__link" href="#statement">Limits</a></div>
+    </nav>
+    <div class="nav__actions">
+      <a class="btn btn--primary" href="#safety" data-open-cleanup>Review build cleanup</a>
+    </div>
+    <button class="nav__toggle" type="button" aria-expanded="false" aria-label="Menu">
+      <svg width="18" height="18" viewBox="0 0 18 18" aria-hidden="true"><path d="M2 5h14M2 13h14" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+  <section class="hero hero--centred" data-enter aria-labelledby="hero-h">
+    <div class="wrap"><div class="hero-text">
+      <div class="hero__c">
+        <a class="pill" href="#safety"><span>1 shared Cargo target</span><span class="muted">599 GB observed</span></a>
+        <h1 id="hero-h">Cargo build cleanup for developers</h1>
+        <p class="hero__lead">Alice reads configured target directories, identifies generated entries, and asks before removing anything. Source and Git history stay.</p>
+        <div class="btn-row">
+          <a class="btn btn--primary" href="#safety" data-open-cleanup>Review build cleanup<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+          <a class="btn btn--secondary" href="#safety">See safety rules</a>
+        </div>
+      </div>
+      <div class="hero__window" aria-label="Alice Build files report" data-visual data-ui>
+        <div class="ly-piece alice-app" id="hero-app">
+          <div class="alice-topbar">
+            <div class="alice-topbar__left"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="alice-wordmark">alice</span><span class="alice-path">~/code</span></div>
+            <div class="alice-topbar__right"><span>Theme: Dark</span><span class="demo-label">DESIGN PREVIEW</span></div>
+          </div>
+          <div class="alice-tabs" role="tablist" aria-label="Cleanup views">
+            <button type="button" role="tab" aria-selected="false" data-tab="worktrees">Worktrees <span>76</span></button>
+            <button type="button" role="tab" aria-selected="true" data-tab="builds">Build files <span>1</span></button>
+          </div>
+          <div data-panel="builds">
+            <div class="alice-hero">
+              <div><p class="alice-note">she found the build cache</p><div class="alice-total"><strong>599 GB</strong><span>ready to review</span></div></div>
+              <img src="local/sweeping-dark-570.png" alt="" class="alice-sweep" width="570" height="318">
+              <div class="disk-line"><span>88% of 1.02 TB used</span><span>29% after</span></div>
+            </div>
+            <div class="target-heading"><p>sweep the build files</p><span>Generated Cargo artifacts</span><button type="button" aria-label="Select all build targets" checked>1 selected</button></div>
+            <div class="target-row">
+              <button type="button" class="target-check" aria-label="Deselect qhipa-ai target" aria-pressed="true"></button>
+              <button type="button" class="target-name" aria-expanded="false" data-target-expand><strong>qhipa-ai</strong><span>Cargo · shared target</span></button>
+              <span class="target-note">regenerable output.</span><strong class="target-size">599 GB</strong><span class="target-chevron" aria-hidden="true">⌄</span>
+            </div>
+            <div class="target-path">~/.cache/cargo-target/qhipa-ai</div>
+            <div class="target-evidence" hidden>
+              <strong>What she checked</strong>
+              <p>Generated entries: debug/.fingerprint, deps, incremental, and Cargo metadata.</p>
+              <p>Active Cargo/rustc check: required again before cleaning.</p>
+              <p>Target root and unrecognized entries: preserved.</p>
+            </div>
+          </div>
+          <div data-panel="worktrees" hidden>
+            <div class="alice-hero"><div><p class="alice-note">the worktrees are still here</p><div class="alice-total"><strong>10 GB</strong><span>observed in 76 worktrees</span></div></div></div>
+            <div class="target-heading"><p>the original report</p><span>Merged, active, and protected work</span></div>
+            <div class="target-row"><span class="worktree-lock" aria-hidden="true">□</span><div class="target-name"><strong>agent/update-readme</strong><span>qhipa-manifest</span></div><span class="target-note">merged. done.</span><strong class="target-size">7.3 KB</strong></div>
+            <div class="target-row"><span class="worktree-lock" aria-hidden="true">□</span><div class="target-name"><strong>agent/fix-window-focus</strong><span>brd-rimay-platform</span></div><span class="target-note">recent work.</span><strong class="target-size">241 MB</strong></div>
+          </div>
+          <div class="alice-footer"><span>Only generated Cargo entries are selected. Source and Git history stay.</span><span class="alice-review-note">Confirmation below</span></div>
+        </div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="section" id="safety" aria-labelledby="safety-h">
+    <div class="wrap">
+      <div class="safety-heading grid grid--top">
+        <div class="span-5"><h2 id="safety-h">Build targets show their evidence</h2></div>
+        <p class="span-6 start-7">Open a target to inspect its path and generated entries. A fresh observation and active-process check happen again before the confirmed batch.</p>
+      </div>
+      <div class="ui app safety-app fill" id="safety-app" aria-label="Cargo target evidence and cleanup confirmation" data-visual data-ui>
+        <div class="alice-topbar">
+          <div class="alice-topbar__left"><span class="window-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="alice-wordmark">alice</span><span class="alice-path">Build files</span></div>
+          <div class="alice-topbar__right"><span>Theme: Dark</span><span class="demo-label">DESIGN PREVIEW</span></div>
+        </div>
+        <div class="safety-content">
+          <div class="evidence-pane">
+            <p class="alice-note">what she checked</p>
+            <p class="evidence-target-name">qhipa-ai</p>
+            <p class="mono-path">~/.cache/cargo-target/qhipa-ai</p>
+            <div class="evidence-rows">
+              <div><span>Observed size</span><strong>599 GB apparent</strong></div>
+              <div><span>Configuration</span><strong>Cargo build.target-dir</strong></div>
+              <div><span>Generated entries</span><strong>debug + tmp + rustc metadata</strong></div>
+              <div><span>Before cleaning</span><strong>Fresh path and process check</strong></div>
+              <div><span>Preserved</span><strong>Root + unrecognized entries</strong></div>
+            </div>
+          </div>
+          <div class="rules-pane">
+            <p class="rules-title">What stays</p>
+            <ul><li>Source files</li><li>Primary and linked worktrees</li><li>Branches and Git history</li><li>Anything Alice does not recognize</li></ul>
+            <p>Rust regenerates the removed entries on the next build.</p>
+          </div>
+        </div>
+        <div class="safety-scrim" data-dialog hidden>
+          <div class="cleanup-dialog" role="dialog" aria-modal="true" aria-labelledby="dialog-h" tabindex="-1">
+            <p class="alice-note">clean these build files?</p>
+            <p class="dialog-title" id="dialog-h">599 GB from 1 Cargo target</p>
+            <p>Alice will remove verified generated entries. Source, worktrees, branches, and the target root stay.</p>
+            <div class="dialog-target"><strong>qhipa-ai</strong><span>599 GB</span><code>~/.cache/cargo-target/qhipa-ai</code></div>
+            <p class="dialog-warning">A fresh observation runs first. Active Cargo or rustc use protects the target. Unrecognized entries stay. This cannot be undone.</p>
+            <div class="dialog-actions"><button class="btn btn--secondary" type="button" data-close-cleanup>Keep build files</button><button class="btn btn--primary" type="button" data-confirm-cleanup>Clean build files</button></div>
+          </div>
+        </div>
+        <div class="cleanup-result" role="status" hidden>
+          <p class="alice-note">all tidy. she's having tea.</p>
+          <strong>599 GB back</strong>
+          <p class="result-title">1 Cargo target cleaned</p>
+          <p>Source, worktrees, and Git history were not touched. The target root and unrecognized entries remain.</p>
+          <p class="preview-status">Preview complete · no files changed</p>
+          <button class="btn btn--secondary" type="button" data-reset-preview>Reset preview</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section statement ground-surface" id="statement" data-moment="word-highlight" aria-labelledby="statement-h">
+    <div class="wrap">
+      <h2 id="statement-h">Build cleanup limits</h2>
+      <p class="mo-wh__text">Only <strong>generated Cargo entries</strong> are removed. Source, worktrees, and branches stay.</p>
+    </div>
+  </section>
+</main>
+
+<footer class="footer closing footer--statement g2m" id="contact" aria-labelledby="close-h" style="--hm: 2">
+  <div class="wrap">
+    <div class="closing__cta close--word">
+      <div class="section-head--split">
+        <div><h2 id="close-h">Review the target before cleaning</h2><p class="t-lead">One configured Cargo target. Every generated entry named.</p></div>
+        <a class="btn btn--primary" href="#safety" data-open-cleanup>Review build cleanup<svg class="m-arrow" viewBox="0 0 12 12" aria-hidden="true"><path class="m-arrow__stem" d="M1 6h8"/><path class="m-arrow__head" d="M4.5 2.5 8 6l-3.5 3.5"/></svg></a>
+      </div>
+      <p class="close__word" aria-hidden="true">Alice</p>
+    </div>
+    <div class="closing__links">
+      <div class="grid">
+        <div class="span-3 stack-4"><a class="nav__logo" href="#top"><img class="alice-logo" src="local/alice-icon.svg" alt="" width="24" height="24" loading="lazy">Alice</a><p class="footer__lede">Cargo build cleanup for developers</p></div>
+        <div class="span-3 footer__col"><h3>Product</h3><ul><li><a href="#top">Build files</a></li><li><a href="#top" data-show-worktrees>Worktrees</a></li></ul></div>
+        <div class="span-3 footer__col"><h3>Safety</h3><ul><li><a href="#safety">Evidence</a></li><li><a href="#statement">Limits</a></li></ul></div>
+        <div class="span-3 footer__col"><h3>Preview</h3><ul><li><a href="#safety" data-open-cleanup>Confirmation</a></li><li><a href="#top">Build files</a></li></ul></div>
+      </div>
+      <div class="footer__legal"><span>© 2026 Alice · DESIGN PREVIEW</span><div class="socials"></div><span>Local project artwork and fonts</span></div>
+    </div>
+  </div>
+</footer>
+<script type="module" src="assets/system.js"></script>
+<script type="module" src="assets/motion/motion.js"></script>
+<script type="module" src="assets/layout/layout.js"></script>
+<script type="module" src="preview.js"></script>
+</body>
+</html>

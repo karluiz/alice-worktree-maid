@@ -1,0 +1,14 @@
+{
+  "origin": "User-approved line-art crop of Alice's original illustration; no external character pixels used.",
+  "source": "design/tray-preview/assets/alice-raw.png, derived from assets/alice-illustrations/greeting.jpg",
+  "commands": {
+    "line": "magick design/tray-preview/assets/alice-raw.png -trim +repage assets/alice-line.png",
+    "monochrome": "magick assets/alice-line.png -fuzz 20% -transparent white -channel RGB -fill white -colorize 100 +channel assets/alice-mono.png",
+    "application": "cp assets/alice-line.png assets/alice-icon.png; cp assets/alice-mono.png assets/alice-symbolic.png",
+    "barLine": "magick design/tray-preview/assets/alice-line.png -crop 220x210+0+0 +repage -background none -resize 128x128^ -gravity center -extent 128x128 assets/alice-bar-line.png",
+    "barMonochrome": "magick design/tray-preview/assets/alice-mono.png -crop 220x210+0+0 +repage -background none -resize 128x128^ -gravity center -extent 128x128 assets/alice-bar-mono.png"
+  },
+  "usage": "Transparent desktop application icon and Omarchy tray launcher. The bar uses the dedicated color head-and-headdress crop with 16px of extra icon slot space and 32 more for the usage label; the popup keeps the full color illustration. The monochrome files remain asset explorations but are not loaded by the tray.",
+  "monochromeSource": "assets/alice-mono.png",
+  "review": "Pixel and monochrome alternatives were reviewed and are not shipped in the minimal Omarchy menu."
+}

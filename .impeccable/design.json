@@ -1,0 +1,74 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-11-11T08:56:11-05:00",
+  "title": "Design System: Alice",
+  "extensions": {
+    "colorMeta": {
+      "paper": {"role":"neutral","displayName":"Paper","canonical":"#ffffff","tonalRamp":["#141414","#383838","#5a5b60","#74757a","#a0a1a5","#d0d0cf","#f6f6f3","#ffffff"]},
+      "wash": {"role":"neutral","displayName":"Warm Wash","canonical":"#f6f6f3","tonalRamp":["#2c2c29","#464641","#62625c","#808079","#a3a39a","#c7c7be","#e7e6e1","#f6f6f3"]},
+      "ink": {"role":"neutral","displayName":"Ink","canonical":"#141414","tonalRamp":["#141414","#292929","#414141","#5a5b60","#74757a","#9a9b9f","#d0d0cf","#f6f6f3"]},
+      "sweep": {"role":"primary","displayName":"Sweep Red","canonical":"#c8331f","tonalRamp":["#3f100a","#641a10","#892516","#c8331f","#e05a45","#eb8370","#f5b8ac","#fbece9"]},
+      "ask": {"role":"secondary","displayName":"Ask Orange","canonical":"#e8821e","tonalRamp":["#462303","#683b08","#a5560a","#e8821e","#ee9e48","#f3ba77","#f9d7ad","#fdf2e6"]},
+      "keep": {"role":"tertiary","displayName":"Keep Blue","canonical":"#2457c5","tonalRamp":["#0b1c44","#12316e","#1a449a","#2457c5","#4e79d5","#7c9de1","#b4c7ee","#ebf0fb"]}
+    },
+    "typographyMeta": {
+      "display": {"displayName":"Display","purpose":"Selected and reclaimed byte totals."},
+      "verdict": {"displayName":"Verdict","purpose":"Alice's three group titles."},
+      "note": {"displayName":"Alice's Hand","purpose":"Short handwritten worktree reads."}
+    },
+    "shadows": [
+      {"name":"confirmation","value":"0 10px 28px rgba(20,20,20,0.20)","purpose":"Protected-focus cleanup dialog only."}
+    ],
+    "motion": [
+      {"name":"rune-snappy","value":"Spring(duration=0.25,bounce=0)","purpose":"Standard control state changes."},
+      {"name":"reference-ease","value":"cubic-bezier(0.23,1,0.32,1)","purpose":"Strong ease-out for evidence expansion and selected-space changes."}
+    ],
+    "breakpoints": [
+      {"name":"target-desktop","value":"1200x780 points"},
+      {"name":"minimum-desktop","value":"1080x700 points"}
+    ]
+  },
+  "components": [
+    {
+      "name":"Primary Button","kind":"button","refersTo":"button-primary","description":"Dark 44-point action for scan, review, and confirmed cleanup.",
+      "html":"<button class=\"ds-btn-primary\">Send Alice in</button>",
+      "css":".ds-btn-primary{background:#141414;color:#fff;padding:0 18px;height:44px;border:0;border-radius:7px;font:600 12px Inter,sans-serif;transition:background .15s}.ds-btn-primary:hover{background:#5a5b60}.ds-btn-primary:focus-visible{outline:2px solid #2457c5;outline-offset:3px}.ds-btn-primary:active{background:#383838}"
+    },
+    {
+      "name":"Secondary Button","kind":"button","refersTo":"button-secondary","description":"Quiet alternative action with a thin neutral rule.",
+      "html":"<button class=\"ds-btn-secondary\">Change folder</button>",
+      "css":".ds-btn-secondary{background:#fff;color:#141414;padding:0 18px;height:44px;border:1px solid #e7e6e1;border-radius:7px;font:600 12px Inter,sans-serif;transition:background .15s,border-color .15s}.ds-btn-secondary:hover{background:#f6f6f3;border-color:#74757a}.ds-btn-secondary:focus-visible{outline:2px solid #2457c5;outline-offset:3px}"
+    },
+    {
+      "name":"Folder Input","kind":"input","refersTo":"input-folder","description":"Monospace local path field with warm-wash background.",
+      "html":"<label class=\"ds-folder-label\">Where should she clean?<input class=\"ds-folder\" value=\"~/code\"></label>",
+      "css":".ds-folder-label{display:grid;gap:8px;color:#141414;font:600 13px Inter,sans-serif}.ds-folder{height:46px;padding:0 12px;background:#f6f6f3;color:#141414;border:1px solid #e7e6e1;border-radius:7px;font:400 12px 'JetBrains Mono',monospace}.ds-folder:focus{border-color:#141414;outline:2px solid #2457c5;outline-offset:2px}"
+    },
+    {
+      "name":"Repository Navigation","kind":"nav","refersTo":"navigation-repository-active","description":"Compact real-repository selector with active paper row.",
+      "html":"<nav class=\"ds-repos\"><button class=\"ds-repo ds-active\"><span>storefront</span><small>26.4 GB</small></button><button class=\"ds-repo\"><span>api</span><small>12.9 GB</small></button></nav>",
+      "css":".ds-repos{display:grid;gap:3px;background:#f6f6f3;padding:12px}.ds-repo{display:flex;align-items:center;justify-content:space-between;gap:6px;height:38px;padding:0 9px;border:1px solid transparent;border-radius:4px;background:transparent;color:#141414;font:400 12px Inter,sans-serif}.ds-repo small{color:#74757a;font-size:10px}.ds-repo:hover{background:#fff}.ds-repo.ds-active{background:#fff;border-color:#e7e6e1;font-weight:600}.ds-repo:focus-visible{outline:2px solid #2457c5;outline-offset:2px}"
+    },
+    {
+      "name":"Sweep Verdict Row","kind":"custom","refersTo":"verdict-row-sweep","description":"Merged worktree with selectable checkbox and handwritten verdict.",
+      "html":"<div class=\"ds-verdict\"><span class=\"ds-check\">✓</span><code>feat/checkout-retry<small>storefront</small></code><span class=\"ds-note\">merged. done, done, done.</span><small>6 days</small><strong>6.9 GB</strong></div>",
+      "css":".ds-verdict{display:grid;grid-template-columns:20px 1fr 245px 65px 70px;gap:13px;align-items:center;min-height:66px;border-bottom:1px solid #e7e6e1;font:400 11px Inter,sans-serif;color:#141414}.ds-check{display:grid;place-items:center;width:20px;height:20px;border-radius:4px;background:#c8331f;color:#fff}.ds-verdict code{font:500 12px 'JetBrains Mono',monospace}.ds-verdict code small{display:block;margin-top:4px;color:#5a5b60;font:400 10px Inter,sans-serif}.ds-note{color:#c8331f;font:400 17px/20px Kalam,cursive}.ds-verdict>small{color:#5a5b60}"
+    },
+    {
+      "name":"Cleanup Confirmation","kind":"card","refersTo":"cleanup-confirmation","description":"Protected-focus dialog with selected branches and fresh-scan warning.",
+      "html":"<section class=\"ds-confirm\"><h2>Sweep this batch?</h2><p>Alice will remove 2 worktree directories. Their branches stay in Git.</p><p class=\"ds-warning\">A fresh Git scan runs first. Newly dirty or unmerged work stays protected.</p><button>Keep worktrees</button><button class=\"ds-sweep\">Sweep worktrees</button></section>",
+      "css":".ds-confirm{width:438px;padding:26px;border-radius:10px;background:#fff;box-shadow:0 10px 28px rgba(20,20,20,.2);font:400 14px/20px Inter,sans-serif;color:#141414}.ds-confirm h2{margin:0 0 17px;color:#c8331f;font:700 30px Kalam,cursive}.ds-warning{color:#c8331f;font-size:12px;line-height:17px}.ds-confirm button{height:44px;padding:0 18px;border:1px solid #e7e6e1;border-radius:7px;background:#fff;font:600 12px Inter,sans-serif}.ds-confirm .ds-sweep{background:#141414;color:#fff;border-color:#141414}.ds-confirm button:focus-visible{outline:2px solid #2457c5;outline-offset:3px}"
+    }
+  ],
+  "narrative": {
+    "northStar":"The robot maid's housekeeping report",
+    "overview":"Alice turns Git maintenance into a domestic sorting ritual. The interface is quiet and exact so the evidence remains readable; Alice's handwritten notes and local illustrations supply the personality. The complete idea/ prototype is the visual authority, not the discarded dashboard direction. Product truth overrides prototype theater: unsupported actions are disabled or absent, demo scenes are labeled, and no bin, undo, schedule, or patch-saving claim appears without an implementation.",
+    "keyCharacteristics":["White-paper workspace with warm gray utility surfaces and thin rules.","Sweep, ask, and keep as the three semantic color families.","Inter for tasks, Kalam for Alice's voice, JetBrains Mono for Git identifiers.","Local raster illustrations for greeting, sweeping, and rest.","Standard desktop controls and a protected-focus confirmation dialog."],
+    "rules":[
+      {"name":"The Verdict First Rule","body":"Red, orange, and blue are reserved for their respective verdicts and directly related evidence; do not spend them as arbitrary decoration.","section":"colors"},
+      {"name":"The One Voice Rule","body":"Handwriting belongs to Alice's short notes and group titles; it never replaces evidence, controls, or long-form explanation.","section":"typography"}
+    ],
+    "dos":["Do keep the three-pile report and handwritten verdict notes at the center of the product.","Do use local raster artwork and bundled fonts so every scene renders offline.","Do label demonstration scenes and report real results without prototype-only promises.","Do preserve the readable list grammar at 1080×700 and allow vertical scrolling for overflow."],
+    "donts":["Don't resurrect the discarded metric-card dashboard or laundry-fold motif.","Don't make ask or keep rows selectable until a safe workflow exists for them.","Don't invent bin, undo, scheduled-scan, patch-saving, or provider capabilities.","Don't use handwriting for controls, evidence, or long paragraphs."]
+  }
+}
